@@ -1,0 +1,173 @@
+﻿@model BookingRoom
+
+@{
+    ViewData["Title"] = "Create Booking";
+}
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #343a40;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #343a40;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+        border: 2px solid #ddd;
+        background: white;
+        color: #333;
+    }
+
+        .form-control:focus {
+            border-color: #28A745;
+            outline: none;
+            box-shadow: 0px 0px 8px rgba(40, 167, 69, 0.2);
+        }
+
+    
+    .btn-success {
+        background: #28A745;
+        border: none;
+        padding: 12px;
+        font-size: 18px;
+        width: 100%;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        color: white;
+        text-transform: uppercase;
+    }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    
+    .btn-primary {
+        background: #007bff;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        width: 100%;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    
+    .btn-danger {
+        background: #dc3545;
+        border: none;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 6px;
+        transition: 0.3s;
+        color: white;
+        margin-top: 10px;
+    }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+    
+    .room-entry {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        border-left: 4px solid #007bff;
+    }
+</style>
+
+
+<div class="container">
+    <h2><i class="fas fa-bed"></i> Booking Rooms</h2>
+
+    <form asp-action="Create" method="post">
+        <input type="hidden" id="BookingID" name="BookingID" value="@ViewData["BookingID"]" />
+
+        <h4>Rooms</h4>
+        <div id="roomsContainer">
+            <div class="room-entry">
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <select name="RoomTypes[]" class="form-control" required>
+                        @foreach (var item in ViewBag.TypeID)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of Adults</label>
+                    <input type="number" name="NumberOfAdults[]" class="form-control" min="1" required />
+                </div>
+                <div class="form-group">
+                    <label>Number of Children</label>
+                    <input type="number" name="NumberOfChildren[]" class="form-control" min="0" required />
+                </div>
+                <button type="button" class="btn btn-danger remove-room"><i class="fas fa-trash-alt"></i> Remove</button>
+            </div>
+        </div>
+
+        <button type="button" id="addRoom" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Add Another Room</button>
+        <button type="submit" class="btn btn-success"><i class="fas fa-check-circle"></i> Create Booking</button>
+    </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#addRoom").click(function () {
+            var roomEntry = $(".room-entry").first().clone();
+            roomEntry.find("input").val("");
+            $("#roomsContainer").append(roomEntry);
+        });
+
+        $("#roomsContainer").on("click", ".remove-room", function () {
+            if ($(".room-entry").length > 1) {
+                $(this).closest(".room-entry").remove();
+            }
+        });
+    });
+</script>

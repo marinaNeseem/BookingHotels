@@ -1,0 +1,30 @@
+﻿@model BookingHotels.Models.BookingRoom
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-2xl font-bold mb-4">Booking Room Details</h1>
+
+<div class="card shadow-sm p-4 rounded">
+    <h4 class="text-lg font-semibold mb-3">Booking Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3 font-weight-bold"> @Html.DisplayNameFor(model => model.Booking) </dt>
+        <dd class="col-sm-9"> @Html.DisplayFor(model => model.Booking.BookingID) </dd>
+
+        <dt class="col-sm-3 font-weight-bold"> @Html.DisplayNameFor(model => model.Type) </dt>
+        <dd class="col-sm-9"> @Html.DisplayFor(model => model.Type.Type) </dd>
+
+        <dt class="col-sm-3 font-weight-bold"> @Html.DisplayNameFor(model => model.NumberOfAdults) </dt>
+        <dd class="col-sm-9"> @Html.DisplayFor(model => model.NumberOfAdults) </dd>
+
+        <dt class="col-sm-3 font-weight-bold"> @Html.DisplayNameFor(model => model.NumberOfChildren) </dt>
+        <dd class="col-sm-9"> @Html.DisplayFor(model => model.NumberOfChildren) </dd>
+    </dl>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.ID" class="btn btn-success">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

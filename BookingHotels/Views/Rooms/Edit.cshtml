@@ -1,0 +1,106 @@
+﻿@model BookingHotels.Models.Room
+
+@{
+    ViewData["Title"] = "Edit Room";
+}
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn-success {
+        background: #28a745; 
+        border: none;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+</style>
+
+
+<div class="container">
+    <h1><i class="fas fa-edit"></i> Edit Room</h1>
+    <hr />
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Type" class="control-label"></label>
+            <input asp-for="Type" class="form-control" placeholder="Enter Room Type" />
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save</button>
+    </form>
+
+    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

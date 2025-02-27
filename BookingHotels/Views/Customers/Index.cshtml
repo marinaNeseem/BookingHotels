@@ -1,0 +1,206 @@
+﻿@model IEnumerable<BookingHotels.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 900px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .btn-primary, .btn-success {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 8px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .btn-success {
+        background: #28a745;
+        border: none;
+        color: white;
+    }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+    .table {
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+        .table th {
+            background-color: #007bff; /* 💙 Blue Header */
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            padding: 15px;
+            text-transform: uppercase;
+        }
+
+        .table td, .table th {
+            padding: 12px;
+            text-align: center;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .search-container {
+        margin-bottom: 15px;
+    }
+
+    .search-box {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+
+        .action-buttons a {
+            text-decoration: none;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+            text-align: center;
+            min-width: 70px;
+        }
+
+    .edit-link {
+        background: #28a745; 
+        color: white;
+    }
+
+        .edit-link:hover {
+            background: #218838;
+        }
+
+    .details-link {
+        background: #007bff; 
+        color: white;
+    }
+
+        .details-link:hover {
+            background: #0056b3;
+        }
+
+    .delete-link {
+        background: #dc3545;
+        color: white;
+    }
+
+        .delete-link:hover {
+            background: #c82333;
+        }
+</style>
+
+
+<div class="container">
+    <h1><i class="fas fa-users"></i> Customers</h1>
+    <hr />
+
+   
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchInput" placeholder="Search Customers..." onkeyup="searchTable()">
+    </div>
+
+  
+    <p>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-user-plus"></i> Create New
+        </a>
+    </p>
+
+   
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>National Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NationalNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    <td class="action-buttons">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="edit-link">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="details-link">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="delete-link">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    function searchTable() {
+        let input = document.getElementById("searchInput");
+        let filter = input.value.toLowerCase();
+        let table = document.querySelector(".table tbody");
+        let rows = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            let rowText = rows[i].innerText.toLowerCase();
+            rows[i].style.display = rowText.includes(filter) ? "" : "none";
+        }
+    }
+</script>

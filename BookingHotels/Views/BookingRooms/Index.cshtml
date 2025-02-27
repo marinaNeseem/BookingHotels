@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BookingHotels.Models.BookingRoom>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-2xl font-bold mb-4">Booking Rooms</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover shadow-sm rounded">
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Booking)</th>
+                <th>@Html.DisplayNameFor(model => model.Type)</th>
+                <th>@Html.DisplayNameFor(model => model.NumberOfAdults)</th>
+                <th>@Html.DisplayNameFor(model => model.NumberOfChildren)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Booking.BookingID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Type.Type)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NumberOfAdults)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NumberOfChildren)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-success">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

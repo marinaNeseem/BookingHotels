@@ -1,0 +1,126 @@
+﻿@model BookingHotels.Models.Booking
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .btn-success {
+        background: #28a745;
+        border: none;
+        padding: 12px;
+        font-size: 18px;
+        width: 100%;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        color: white;
+        text-transform: uppercase;
+    }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .btn-secondary {
+        background: #007bff;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        width: 100%;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        color: white;
+        margin-top: 10px;
+    }
+
+        .btn-secondary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+</style>
+
+<div class="container">
+    <h1><i class="fas fa-edit"></i> Edit Booking</h1>
+    <hr />
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="BookingID" />
+
+        <div class="form-group">
+            <label asp-for="CustomerID"></label>
+            <select asp-for="CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+            <span asp-validation-for="CustomerID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BranchID"></label>
+            <select asp-for="BranchID" class="form-control" asp-items="ViewBag.BranchID"></select>
+            <span asp-validation-for="BranchID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CheckInDate"></label>
+            <input asp-for="CheckInDate" class="form-control" type="datetime-local" />
+            <span asp-validation-for="CheckInDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CheckOutDate"></label>
+            <input asp-for="CheckOutDate" class="form-control" type="datetime-local" />
+            <span asp-validation-for="CheckOutDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Discount"></label>
+            <input asp-for="Discount" class="form-control" />
+            <span asp-validation-for="Discount" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Changes</button>
+    </form>
+
+    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

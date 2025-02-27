@@ -1,0 +1,140 @@
+﻿@model BookingHotels.Models.Booking
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .details-container {
+        padding: 20px;
+    }
+
+        .details-container dt {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+    .table {
+        margin-top: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .table thead {
+            background: #007bff;
+            color: white;
+        }
+
+    .btn-primary, .btn-secondary {
+        padding: 12px;
+        font-size: 16px;
+        width: 100%;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        color: white;
+    }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+</style>
+
+<div class="container">
+    <h1><i class="fas fa-info-circle"></i> Booking Details</h1>
+    <hr />
+
+    <div class="details-container">
+        <dl class="row">
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Customer)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Customer.FirstName)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Branch)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Branch.BranchName)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CheckInDate)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.CheckInDate)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CheckOutDate)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.CheckOutDate)</dd>
+
+            <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Discount)</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Discount) %</dd>
+        </dl>
+    </div>
+
+    
+    <h4><i class="fas fa-bed"></i> Booked Rooms</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Room Type</th>
+                <th>Adults</th>
+                <th>Children</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewData["BookingRooms"] is List<BookingHotels.Models.BookingRoom> bookingRooms)
+            {
+                @foreach (var room in bookingRooms)
+                {
+                    <tr>
+                        <td>@room.Type.Type</td> <!-- Ensure 'Type' is a valid property -->
+                        <td>@room.NumberOfAdults</td>
+                        <td>@room.NumberOfChildren</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">No rooms booked.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Edit" asp-route-id="@Model?.BookingID" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Booking</a>
+    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+</div>

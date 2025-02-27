@@ -1,0 +1,93 @@
+﻿@model BookingHotels.Models.Room
+
+@{
+    ViewData["Title"] = "Room Details";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .row {
+        margin-top: 20px;
+    }
+
+    dt {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        width: 48%;
+        text-align: center;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        color: white;
+    }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-between;
+    }
+</style>
+
+<!-- 🌟 Room Details -->
+<div class="container">
+    <h1><i class="fas fa-info-circle"></i> Room Details</h1>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Type)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Type)</dd>
+    </dl>
+
+    <div class="btn-container">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+        <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+    </div>
+</div>

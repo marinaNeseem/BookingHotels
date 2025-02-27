@@ -1,0 +1,131 @@
+﻿@model BookingHotels.Models.Customer
+
+@{
+    ViewData["Title"] = "Create Customer";
+}
+
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+            color: #343a40;
+            display: block;
+        }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .form-text {
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 12px;
+        font-size: 16px;
+        width: 100%;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: 0.3s;
+        text-transform: uppercase;
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+    .btn-secondary {
+        background: #6c757d;
+        border: none;
+        color: white;
+    }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+</style>
+
+
+<div class="container">
+    <h1><i class="fas fa-user-plus"></i> Create Customer</h1>
+    <hr />
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="NationalNumber" class="control-label">National ID Number</label>
+            <input asp-for="NationalNumber" class="form-control" placeholder="Enter National ID Number" />
+            <small class="form-text">Use your official identification number.</small>
+            <span asp-validation-for="NationalNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label">First Name (Given Name)</label>
+            <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+            <small class="form-text">Your legal first name as it appears on documents.</small>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label">Last Name (Surname)</label>
+            <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+            <small class="form-text">Your legal surname/family name.</small>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
+            <small class="form-text">Include country code if applicable.</small>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create</button>
+    </form>
+
+    <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
